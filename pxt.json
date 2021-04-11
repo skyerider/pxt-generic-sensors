@@ -1,0 +1,19 @@
+{
+    "name": "micro:bit泛用模块集合",
+    "version": "1.0.0",
+    "description": "micro:bit兼容的泛用模块集合扩展",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts",
+        "EMRGBLight.ts",        
+        "_locales/zh/microbit-generic-module-strings.json"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true
+}
