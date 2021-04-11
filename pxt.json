@@ -1,7 +1,7 @@
 {
-    "name": "micro:bit泛用模块集合",
+    "name": "micro:bit泛用模块集合 by 文小闲@创之翼",
     "version": "1.0.0",
-    "description": "micro:bit兼容的泛用模块集合扩展",
+    "description": "这个扩展用于帮助学生们不受限制的在各种micro:bit扩展板上使用泛用的电子模块，仅限教育用途",
     "license": "MIT",
     "dependencies": {
         "core": "*"
