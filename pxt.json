@@ -9,7 +9,6 @@
     "files": [
         "README.md",
         "main.ts",
-        "EMRGBLight.ts",        
         "_locales/zh/microbit-generic-module-strings.json"
     ],
     "testFiles": [
