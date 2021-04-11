@@ -648,35 +648,35 @@ namespace makerbit {
   let matBuf = pins.createBuffer(17);
   let distanceBuf = 0;
 
-    /**
-     * Get RUS04 distance
-     * @param pin Microbit ultrasonic pin; eg: P2
-    */
-    //% blockId=Ultrasonic block="Read RgbUltrasonic Distance at pin %pin(cm)"  group="RGB超声波"
-    //% weight=76
-    //% inlineInputMode=inline
-    //% subcategory="传感器"
-    export function Ultrasonic(pin: DigitalPin): number {
-      pins.setPull(pin, PinPullMode.PullNone);
-      pins.digitalWritePin(pin, 0);
-      control.waitMicros(2);
-      pins.digitalWritePin(pin, 1);
-      control.waitMicros(50);
-      pins.digitalWritePin(pin, 0);
-      control.waitMicros(1000);
-      while(!pins.digitalReadPin(pin));
-      // read pulse
-      let d = pins.pulseIn(pin, PulseValue.High, 25000);
-      let ret = d;
-      // filter timeout spikes
-      if (ret == 0 && distanceBuf != 0) {
-          ret = distanceBuf;
-      }
-      distanceBuf = d;
-      //return d;
-      return Math.floor(ret * 9 / 6 / 58);
-      //return Math.floor(ret / 40 + (ret / 800));
-      // Correction
+  /**
+   * Get RUS04 distance
+   * @param pin Microbit ultrasonic pin; eg: P2
+  */
+  //% blockId=Ultrasonic block="从引脚 %pin 上的RGB超声波模块获取距离(cm)"  group="RGB超声波"
+  //% weight=76
+  //% inlineInputMode=inline
+  //% subcategory="传感器"
+  export function Ultrasonic(pin: DigitalPin): number {
+    pins.setPull(pin, PinPullMode.PullNone);
+    pins.digitalWritePin(pin, 0);
+    control.waitMicros(2);
+    pins.digitalWritePin(pin, 1);
+    control.waitMicros(50);
+    pins.digitalWritePin(pin, 0);
+    control.waitMicros(1000);
+    while(!pins.digitalReadPin(pin));
+    // read pulse
+    let d = pins.pulseIn(pin, PulseValue.High, 25000);
+    let ret = d;
+    // filter timeout spikes
+    if (ret == 0 && distanceBuf != 0) {
+        ret = distanceBuf;
+    }
+    distanceBuf = d;
+    //return d;
+    return Math.floor(ret * 9 / 6 / 58);
+    //return Math.floor(ret / 40 + (ret / 800));
+    // Correction
 
   }
 
@@ -769,7 +769,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId="sensorbit_rus04" block="part %index show color %rgb effect %effect rgbpin %pin"  group="RGB超声波"
+  //% blockId="sensorbit_rus04" block="选择引脚%pin选择彩灯%index选择颜色%rgb选择效果%effect"
   //% weight=75
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -784,7 +784,7 @@ namespace makerbit {
    * @param unit desired conversion unit
    * @param maxCmDistance maximum distance in centimeters (default is 500)
    */
-  //% blockId="sensor_ping" block="ping trig %trig|echo %echo|unit %unit" group="普通超声波"
+  //% blockId="sensor_ping" block="trig引脚 %trig|echo引脚 %echo|单位 %unit" group="普通超声波"
   //% weight=75
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -807,21 +807,21 @@ namespace makerbit {
       }
   }
 
-  //% blockId=actuator_buzzer0 block="actuator_buzzer0 pin ：%pin|status %status"   group="有源蜂鸣器"
+  //% blockId=actuator_buzzer0 block="有源蜂鸣器控制引脚 ：%pin|状态 %status"   group="有源蜂鸣器"
   //% weight=70
   //% subcategory="执行器"
   export function actuator_buzzer0(pin: DigitalPin, status: on_off): void {
       pins.digitalWritePin(pin, status)
   }
 
-  //% blockId=actuator_buzzer1 block="actuator_buzzer1 pin ：%pin|freq %freq"   group="无源蜂鸣器"
+  //% blockId=actuator_buzzer1 block="无源蜂鸣器控制引脚 ：%pin|频率 %freq"   group="无源蜂鸣器"
   //% weight=70
   //% subcategory="执行器"
   export function actuator_buzzer1(pin: AnalogPin, freq: number): void {
       pins.analogWritePin(pin, freq)
   }
 
-  //% blockId=actuator_relay block="actuator_relay pin ：%pin|status %status"   group="继电器"
+  //% blockId=actuator_relay block="继电器控制引脚 ：%pin|状态 %status"   group="继电器"
   //% weight=70
   //% subcategory="执行器"
   export function actuator_relay(pin: DigitalPin, status: on_off): void {
@@ -832,16 +832,16 @@ namespace makerbit {
   let _SDO = 0
   let _SCL = 0
 
-  //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="触摸键盘"
+  //% blockId=actuator_keyborad_pin block="触摸键盘初始化|SDA引脚 %SDO|SCL引脚 %SCL"   group="触摸键盘"
   //% weight=71
   //% subcategory="执行器"
-  export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
+  export function actuator_keyborad_pin(SDA: DigitalPin, SCL: DigitalPin): void {
 
-      _SDO = SDO
+      _SDO = SDA
       _SCL = SCL
   }
 
-  //% blockId=actuator_keyborad_read block="actuator_keyborad_read"   group="触摸键盘"
+  //% blockId=actuator_keyborad_read block="读取到的键盘值"   group="触摸键盘"
   //% weight=70
   //% subcategory="执行器"
   export function actuator_keyborad_read(): string {
@@ -879,7 +879,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=setled block="set led ：%lpin|status %lstatus"   group="LED灯"
+  //% blockId=setled block="设置LED灯引脚：%lpin|状态 %lstatus"   group="LED灯"
   //% weight=70
   //% subcategory="显示器"
   export function setled(lpin: DigitalPin, lstatus: ledon_off): void {
@@ -889,7 +889,7 @@ namespace makerbit {
   let _Gpins = 0
   let _Bpins = 0
 
-  //% blockId=setrgbpin block="set RGBlight pin|g %_GPin|b %_BPin|r %_RPin"   group="三色灯"
+  //% blockId=setrgbpin block="设置三色灯引脚|绿 %_GPin|蓝 %_BPin|红 %_RPin"   group="三色灯"
   //% weight=70
   //% subcategory="显示器"
   export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
@@ -898,7 +898,7 @@ namespace makerbit {
       _Rpins = _RPin
   }
 
-  //% blockId=yledon block="set color pin|r_color %r_color|g_color %g_color|b_color %b_color"   group="三色灯"
+  //% blockId=yledon block="设置颜色|红 %r_color|绿 %g_color|蓝 %b_color"   group="三色灯"
   //% r_color.min=0  r_color.max=255
   //% g_color.min=0  g_color.max=255
   //% b_color.min=0  b_color.max=255
@@ -939,7 +939,7 @@ namespace makerbit {
       set(d << 4)
   }
 
-  //% block="LcdInit $addr" addr.defl="39"  group="LCD1602显示屏"  
+  //% block="LCD1602显示屏初始化,地址 $addr" addr.defl="39"  group="LCD1602显示屏"  
   //% subcategory="显示器"
   //% weight=70
   export function i2cLcdInit(addr: number) {
@@ -958,7 +958,7 @@ namespace makerbit {
       lcdcmd(0x01)
   }
 
-  //% block="showchar $ch|col $x|row $y"   group="LCD1602显示屏"  
+  //% block="第$y行第$x列显示字符$ch"   group="LCD1602显示屏"  
   //% subcategory="显示器"
   //% weight=69
   export function i2cLcdShowChar(y: number, x: number, ch: string): void {
@@ -974,7 +974,7 @@ namespace makerbit {
       lcddat(ch.charCodeAt(0))
   }
 
-  //% block="showNumber $n|col $x|row $y"   group="LCD1602显示屏"  
+  //% block="第$y行第$x列显示数字$n"   group="LCD1602显示屏"  
   //% subcategory="显示器"
   //% weight=68
   export function i2cLcdShowNumber(y: number, x: number, n: number): void {
@@ -982,7 +982,7 @@ namespace makerbit {
       i2cLcdShowString(y, x, s)
   }
 
-  //% block="showString $s|col $x|row $y"   group="LCD1602显示屏"  
+  //% block="第$y行第$x列显示字符串$s"   group="LCD1602显示屏"  
   //% subcategory="显示器"
   //% weight=67
   export function i2cLcdShowString(y: number, x: number, s: string): void {
@@ -1002,7 +1002,7 @@ namespace makerbit {
   }
 
 
-  //% block="i2cLcdDisplay_Control"   group="LCD1602显示屏"  
+  //% block="LCD1602显示屏控制"   group="LCD1602显示屏"  
   //% subcategory="显示器"
   //% weight=64
   export function i2cLcdDisplay_Control(item: Item): void {
@@ -1017,7 +1017,7 @@ namespace makerbit {
       }
   }
 
-  //% subcategory="显示器"   group="LCD1602显示屏"
+  //% subcategory="显示器"  block="设置背景光" group="LCD1602显示屏"
   //% blockId="Backlight switch control"
   //% weight=79
   export function seti2cLcdBacklight(backlight: LcdBacklight): void {
@@ -1116,7 +1116,7 @@ namespace makerbit {
        * set TM1637 intensity, range is [0-8], 0 is off.
        * @param val the brightness of the TM1637, eg: 7
        */
-      //% blockId="TM1637_set_intensity" block="%tm| set intensity %val"  group="TM1637数码管"
+      //% blockId="TM1637_set_intensity" block="%tm| 设置亮度 %val"  group="TM1637数码管"
       //% weight=88 
       //% parts="TM1637"
       //% subcategory="显示器"
@@ -1151,7 +1151,7 @@ namespace makerbit {
        * @param num number will show, eg: 5
        * 
        */
-      //% blockId="TM1637_showbit" block="%tm| show digit %num |at %bit"  group="TM1637数码管"
+      //% blockId="TM1637_showbit" block="%tm第 %bit 位显示数字 %num"  group="TM1637数码管"
       //% weight=90 blockGap=8
       //% parts="TM1637"
       //% bit.max=3 bit.min=0
@@ -1165,7 +1165,7 @@ namespace makerbit {
         * show a number. 
         * @param num is a number, eg: 0
         */
-      //% blockId="TM1637_shownum" block="%tm| show number %num"  group="TM1637数码管"
+      //% blockId="TM1637_shownum" block="%tm显示数字 %num"  group="TM1637数码管"
       //% weight=91 blockGap=8
       //% parts="TM1637"
       //% subcategory="显示器"
@@ -1185,7 +1185,7 @@ namespace makerbit {
         * show a hex number. 
         * @param num is a hex number, eg: 0
         */
-      //% blockId="TM1637_showhex" block="%tm| show hex number %num"   group="TM1637数码管"
+      //% blockId="TM1637_showhex" block="%tm显示十六进制数字%num"   group="TM1637数码管"
       //% weight=90 blockGap=8
       //% parts="TM1637"
       //% subcategory="显示器"
@@ -1206,7 +1206,7 @@ namespace makerbit {
        * @param bit is the position,eg: 0
        * 
        */
-      //% blockId="TM1637_showDP" block="%tm| DotPoint at %bit|show %_status"  group="TM1637数码管"
+      //% blockId="TM1637_showDP" block="%tm| 点%bit|显示 %_status"  group="TM1637数码管"
       //% weight=70 blockGap=8
       //% parts="TM1637"
       //% subcategory="显示器"
@@ -1218,7 +1218,7 @@ namespace makerbit {
           else this._dat(bit, this.buf[bit] & 0x7F)
       }
 
-      //% blockId="TM1637_clear" block="clear %tm"  group="TM1637数码管"
+      //% blockId="TM1637_clear" block="%tm清除显示"  group="TM1637数码管"
       //% weight=80 blockGap=8
       //% parts="TM1637"
       //% subcategory="显示器"
@@ -1229,7 +1229,7 @@ namespace makerbit {
           }
       }
 
-      //% blockId="TM1637_on" block="turn on %tm"  group="TM1637数码管"
+      //% blockId="TM1637_on" block="%tm打开显示"  group="TM1637数码管"
       //% weight=86 blockGap=8
       //% parts="TM1637"
       //% subcategory="显示器"
@@ -1239,7 +1239,7 @@ namespace makerbit {
           this._write_dsp_ctrl()
       }
 
-      //% blockId="TM1637_off" block="turn off %tm"  group="TM1637数码管"
+      //% blockId="TM1637_off" block="%tm关闭显示"  group="TM1637数码管"
       //% weight=85 blockGap=8
       //% parts="TM1637"
       //% subcategory="显示器"
@@ -1251,7 +1251,7 @@ namespace makerbit {
   }
 
   //% weight=99 
-  //% blockId="TM1637_create" block="CLK %clk|DIO %dio|intensity %intensity|LED count %count"  group="TM1637数码管"
+  //% blockId="TM1637_create" block="TM1637初始化CLK引脚%clk DIO引脚%dio亮度%intensityLED数量(1到4)%count"  group="TM1637数码管"
   //% inlineInputMode=inline
   //% subcategory="显示器"
   //% intensity.max=8 intensity.min=0
@@ -1282,7 +1282,7 @@ namespace makerbit {
       pins.i2cWriteNumber(DISPLAY_I2C_ADDRESS + (bit % 4), d, NumberFormat.Int8BE)
   }
 
-  //% blockId="TM650_Control" block="display control" group="TM1650数码管"
+  //% blockId="TM650_Control" block="%option显示" group="TM1650数码管"
   //% weight=40 blockGap=8
   //% subcategory="显示器"
   export function TM650_Control(option: Select) {
@@ -1302,7 +1302,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId="TM650_DIGIT" block="show digit %num|at %bit"  group="TM1650数码管"
+  //% blockId="TM650_DIGIT" block="第%bit位显示数据%num"  group="TM1650数码管"
   //% weight=80 blockGap=8
   //% num.max=15 num.min=0
   //% subcategory="显示器"
@@ -1312,7 +1312,7 @@ namespace makerbit {
       dat(bit, _SEG[num % 16])
   }
 
-  //% blockId="TM650_SHOW_NUMBER" block="show number %num"  group="TM1650数码管"
+  //% blockId="TM650_SHOW_NUMBER" block="显示数据%num"  group="TM1650数码管"
   //% weight=100 blockGap=8
   //% subcategory="显示器"
   export function showNumber(num: number) {
@@ -1327,7 +1327,7 @@ namespace makerbit {
       digit(Math.idiv(num, 100) % 10, 1)
   }
 
-  //% blockId="TM650_SHOW_HEX_NUMBER" block="show hex number %num"  group="TM1650数码管"
+  //% blockId="TM650_SHOW_HEX_NUMBER" block="显示十六进制数据%num"  group="TM1650数码管"
   //% weight=90 blockGap=8
   //% subcategory="显示器"
   export function showHex(num: number) {
@@ -1342,7 +1342,7 @@ namespace makerbit {
       digit((num >> 8) % 16, 1)
   }
 
-  //% blockId="TM650_SHOW_DP" block="show dot point %bit|show %num" group="TM1650数码管"
+  //% blockId="TM650_SHOW_DP" block="设置点 %bit|show %status" group="TM1650数码管"
   //% weight=80 blockGap=8
   //% subcategory="显示器"
   //% bit.max=3 bit.min=0
@@ -1352,7 +1352,7 @@ namespace makerbit {
       else dat(bit, dbuf[bit % 4] & 0x7F)
   }
 
-  //% blockId="TM650_INTENSITY" block="set intensity %dat" group="TM1650数码管"
+  //% blockId="TM650_INTENSITY" block="设置亮度 %dat" group="TM1650数码管"
   //% weight=70 blockGap=8
   //% subcategory="显示器"
   //% dat.max=7 dat.min=0
@@ -1370,7 +1370,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=touchbutton block="touch |digital pin %pin"   group="触摸按键"
+  //% blockId=touchbutton block="引脚%pin检测到触摸？"   group="触摸按键"
   //% weight=70
   //% subcategory="基础输入模块"
   export function touchButton(pin: DigitalPin): boolean {
@@ -1382,7 +1382,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=button block="Button |digital pin %pin"   group="按键开关"
+  //% blockId=button block="引脚%pin检测到按键被按下？"   group="按键开关"
   //% weight=70
   //% subcategory="基础输入模块"
   export function Button(pin: DigitalPin): boolean {
@@ -1394,7 +1394,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=crashbutton block="crashButton |digital pin %pin"   group="碰撞开关"
+  //% blockId=crashbutton block="引脚%pin检测到碰撞？"   group="碰撞开关"
   //% weight=70
   //% subcategory="基础输入模块"
   export function crashButton(pin: DigitalPin): boolean {
@@ -1406,7 +1406,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=slideRheostat block="slideRheostat |analog pin %pin"   group="滑动变阻器"
+  //% blockId=slideRheostat block="引脚%pin获取滑动变阻器的模拟值"   group="滑动变阻器"
   //% weight=70
   //% subcategory="基础输入模块"
   export function slideRheostat(pin: AnalogPin): number {
@@ -1414,7 +1414,7 @@ namespace makerbit {
       return row
   }
 
-  //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器"
+  //% blockId=rotaryPotentiometer block="引脚%pin获取旋转电位器的模拟值" group="旋转电位器"
   //% weight=70
   //% subcategory="基础输入模块"
   export function rotaryPotentiometer(pin: AnalogPin): number {
@@ -1426,7 +1426,7 @@ namespace makerbit {
   let Ypin = 0
   let Bpin = 0
 
-  //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
+  //% blockId=rockerPin block="摇杆初始化引脚X%pinx引脚Y%piny引脚B%pinb" group="摇杆模块"
   //% weight=70
   //% subcategory="基础输入模块"
   export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
@@ -1435,7 +1435,7 @@ namespace makerbit {
       Bpin = pinb
   }
 
-  //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
+  //% blockId=_analogRead block=" %selectpin获取模拟值" group="摇杆模块"
   //% weight=69
   //% subcategory="基础输入模块"
   export function _analogRead(selectpin: _rockerpin): number {
@@ -1447,7 +1447,7 @@ namespace makerbit {
       return pins.analogReadPin(a)
   }
 
-  //% blockId=_digitalRead block="Is the rocker module pressed?" group="摇杆模块"
+  //% blockId=_digitalRead block="摇杆模块按键被按下？" group="摇杆模块"
   //% weight=68
   //% subcategory="基础输入模块"
   export function _digitalRead(): boolean {
@@ -1462,7 +1462,7 @@ namespace makerbit {
   let _DIO = 0
   let _CLK = 0
 
-  //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="钢琴模块"
+  //% blockId=basic_piano_pin block="钢琴模块初始化引脚 DIO %DIO CLK %CLK"   group="钢琴模块"
   //% weight=70
   //% subcategory="基础输入模块"
   export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
@@ -1471,7 +1471,7 @@ namespace makerbit {
       _CLK = CLK
   }
 
-  //% blockId=basic_piano_play block="basic_piano_play"   group="钢琴模块"
+  //% blockId=basic_piano_play block="弹奏钢琴"   group="钢琴模块"
   //% weight=69
   //% subcategory="基础输入模块"
   export function basic_piano_play(): void {
@@ -1507,7 +1507,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=sensor_temperature block="Pin %pin reads the analog value of the LM35"  group="LM35温度传感器"
+  //% blockId=sensor_temperature block="引脚%pin获取环境温度"  group="LM35温度传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1517,7 +1517,7 @@ namespace makerbit {
 
   }
 
-  //% blockId=sensor_flame block="Pin %pin reads the digital value of the flame sensor" group="火焰传感器"
+  //% blockId=sensor_flame block="引脚%pin检测到火焰？" group="火焰传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1530,7 +1530,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=sensor_flame_analog block="Pin %pin reads the analog value of the flame sensor" group="火焰传感器"
+  //% blockId=sensor_flame_analog block="引脚%pin读取火焰的模拟值" group="火焰传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1538,7 +1538,7 @@ namespace makerbit {
       return pins.analogReadPin(pin)
   }
 
-  //% blockId=sensor_infraredTracking block="Pin %pin reads the digital value of the infraredTracking sensor" group="红外寻迹传感器"
+  //% blockId=sensor_infraredTracking block="引脚%pin检测到黑线？" group="红外寻迹传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1551,7 +1551,7 @@ namespace makerbit {
       }
   }
 
-  //% blockId=sensor_incline block="sensor_incline pin |digitalpin %pin" group="倾斜传感器"
+  //% blockId=sensor_incline block="引脚%pin检测到倾斜？" group="倾斜传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1570,7 +1570,7 @@ namespace makerbit {
    * 光敏传感器
    */
 
-  //% blockId=sensor_illumination block="sensor_illumination pin |analogpin %pin" group="光敏传感器"
+  //% blockId=sensor_illumination block="引脚%pin获取光照强度模拟值" group="光敏传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1582,7 +1582,7 @@ namespace makerbit {
    * 热敏传感器
    */
 
-  //% blockId=sensor_thermosensitive block="sensor_thermosensitive pin |analogpin %pin" group="热敏传感器"
+  //% blockId=sensor_thermosensitive block="引脚%pin获取热度模拟值" group="热敏传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1594,7 +1594,7 @@ namespace makerbit {
    * 水位传感器
    */
 
-  //% blockId=sensor_waterLevel block="sensor_waterLevel pin |analogpin %pin" group="水位传感器"
+  //% blockId=sensor_waterLevel block="引脚%pin获取水位模拟值" group="水位传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1606,7 +1606,7 @@ namespace makerbit {
    * 土壤湿度传感器
    */
 
-  //% blockId=sensor_soilMoisture block="sensor_soilMoisture pin |analogpin %pin"  group="土壤湿度传感器"
+  //% blockId=sensor_soilMoisture block="引脚%pin获取湿度模拟值"  group="土壤湿度传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1618,7 +1618,7 @@ namespace makerbit {
    * 避障传感器
    */
 
-  //% blockId=sensor_obstacleAvoid block="sensor_obstacleAvoid pin |digitalpin %pin" group="避障传感器"
+  //% blockId=sensor_obstacleAvoid block="引脚%pin检测到前方有障碍物？" group="避障传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1636,7 +1636,7 @@ namespace makerbit {
    * 磁簧开关传感器
    */
 
-  //% blockId=sensor_reedSwitch block="sensor_reedSwitch pin |digitalpin %pin" group="磁簧开关传感器"
+  //% blockId=sensor_reedSwitch block="引脚%pin检测到磁场？" group="磁簧开关传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1653,7 +1653,7 @@ namespace makerbit {
    * 人体热释电传感器
    */
 
-  //% blockId=sensor_humanBody block="sensor_humanBody pin |digitalpin %pin" group="人体热释电传感器"
+  //% blockId=sensor_humanBody block="引脚%pin检测到人体热源？" group="人体热释电传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1670,7 +1670,7 @@ namespace makerbit {
    * 震动传感器
    */
 
-  //% blockId=sensor_quake block="sensor_quake pin |digitalpin %pin" group="震动传感器"
+  //% blockId=sensor_quake block="引脚%pin检测到震动？" group="震动传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1687,7 +1687,7 @@ namespace makerbit {
    * 震动传感器
    */
 
-  //% blockId=sensor_quake_analog block="sensor_quake pin |digitalpin %pin" group="震动传感器"
+  //% blockId=sensor_quake_analog block="引脚%pin获取震动模拟值" group="震动传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1699,7 +1699,7 @@ namespace makerbit {
    * 灰度传感器
    */
 
-  //% blockId=sensor_grayLevel block="sensor_grayLevel pin |analogpin %pin" group="灰度传感器"
+  //% blockId=sensor_grayLevel block="引脚%pin获取颜色模拟值" group="灰度传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
@@ -1710,22 +1710,21 @@ namespace makerbit {
   /**
    * 声音传感器
    */
-  //% blockId=sensor_sound_analogread  block="Pin %pin reads the analog value of the sound sensor" group="声音传感器"
+  //% blockId=sensor_sound_analogread  block="引脚%pin获取声音的模拟值" group="声音传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
-  export function sensor_sound_analogread(_AS: AnalogPin): number {
-      return pins.analogReadPin(_AS)
+  export function sensor_sound_analogread(pin: AnalogPin): number {
+      return pins.analogReadPin(pin)
 
   }
 
-  //% blockId=sensor_sound_digitalread  block="Pin %pin reads the digital value of the sound sensor" group="声音传感器"
+  //% blockId=sensor_sound_digitalread  block="引脚%pin检测到声音？" group="声音传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
-  export function sensor_sound_digitalread(_DS: DigitalPin): boolean {
-   //   pins.digitalWritePin(_DS, 0)
-      if (pins.digitalReadPin(_DS) == 1) {
+  export function sensor_sound_digitalread(pin: DigitalPin): boolean {
+      if (pins.digitalReadPin(pin) == 1) {
           return false;
       } else {
           return true;
@@ -1735,21 +1734,21 @@ namespace makerbit {
   /**
    * 雨滴传感器
    */
-  //% blockId=sensor_rain_analogread  block="Pin %pin reads the analog value of the rain sensor"  group="雨滴传感器"
+  //% blockId=sensor_rain_analogread  block="引脚%pin获取雨滴的模拟值"  group="雨滴传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
-  export function sensor_rain_analogread(_DR: AnalogPin): number {
-      return pins.analogReadPin(_DR)
+  export function sensor_rain_analogread(pin: AnalogPin): number {
+      return pins.analogReadPin(pin)
   }
 
-  //% blockId=sensor_rain_digitalread  block="Pin %pin reads the digital value of the rain sensor"   group="雨滴传感器"
+  //% blockId=sensor_rain_digitalread  block="引脚%pin雨滴传感器检测到雨滴?"   group="雨滴传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
-  export function sensor_rain_digitalread(_DR: DigitalPin): boolean {
+  export function sensor_rain_digitalread(pin: DigitalPin): boolean {
     //  pins.digitalWritePin(_DR, 0)
-      if (pins.digitalReadPin(_DR) == 1) {
+      if (pins.digitalReadPin(pin) == 1) {
           return false;
       } else {
           return true;
@@ -1759,28 +1758,28 @@ namespace makerbit {
   /**
    * 气体传感器
    */
-  //% blockId=sensor_gas_analogread  block="Pin %pin reads the analog value of the MQ4-gas sensor"  group="气体传感器"
+  //% blockId=sensor_gas_analogread  block="引脚%pin获取到气体的模拟值"  group="气体传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
-  export function sensor_gas_analogread(_AG: AnalogPin): number {
-      return pins.analogReadPin(_AG)
+  export function sensor_gas_analogread(pin: AnalogPin): number {
+      return pins.analogReadPin(pin)
   }
 
-  //% blockId=sensor_gas_digitalread  block="Pin %pin reads the digital value of the MQ4-gas sensor"  group="气体传感器"
+  //% blockId=sensor_gas_digitalread  block="引脚%pin检测到气体？"  group="气体传感器"
   //% weight=70
   //% inlineInputMode=inline
   //% subcategory="传感器"
-  export function sensor_gas_digitalread(_DG: DigitalPin): boolean {
+  export function sensor_gas_digitalread(pin: DigitalPin): boolean {
     //  pins.digitalWritePin(_DG, 0)
-      if (pins.digitalReadPin(_DG) == 1) {
+      if (pins.digitalReadPin(pin) == 1) {
           return true;
       } else {
           return false;
       }
   }
 
-  //% blockId="readdht11" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
+  //% blockId="readdht11" block="引脚 %dht11pin 获取温湿度传感器的 %dht11type"  group="温湿度传感器"
   //% subcategory="传感器"
   //% inlineInputMode=inline
   export function dht11value(dht11pin: DigitalPin, dht11type: DHT11Type): number {
@@ -1838,7 +1837,7 @@ namespace makerbit {
 /**
    * 循迹传感器
    */
-  //% blockId=sensor_tracking block="sensor_tracking pin |digitalpin %pin"  group="循迹传感器"
+  //% blockId=sensor_tracking block="引脚 %pin 检测到黑线？"  group="循迹传感器"
   //% weight=74
   //% subcategory="传感器"
   //% inlineInputMode=inline
@@ -1858,7 +1857,7 @@ namespace makerbit {
     /**
      * 四路循迹传感器初始化
      */
-    //% blockId=four_sensor_tracking block="four_sensor_tracking pin1 |digitalpin %pin1 pin2 |digitalpin %pin2 |pin3 |digitalpin %pin3 |pin4 |digitalpin %pin4"  group="循迹传感器"
+    //% blockId=four_sensor_tracking block="四路循迹初始化引脚OUT0|%pin1|引脚OUT1|%pin2|引脚OUT2|%pin3|引脚OUT3|%pin4"  group="循迹传感器"
     //% inlineInputMode=inline
     //% weight=73
     //% subcategory="传感器"
@@ -1869,7 +1868,7 @@ namespace makerbit {
       outPin4 = pin4;
     }
     
-    //% blockId=four_sensor_trackingValue block="four_sensor_tracking get sensor value"  group="循迹传感器"
+    //% blockId=four_sensor_trackingValue block="四路循迹传感器获取的值"  group="循迹传感器"
     //% inlineInputMode=inline
     //% weight=72
     //% subcategory="传感器"
@@ -1902,7 +1901,7 @@ namespace makerbit {
       return result;
     }
 
-          //% blockId="dht11value_v2" block="value of dht11 %dht11type at pin %dht11pin"  group="温湿度传感器"
+          //% blockId="dht11value_v2" block="引脚 %dht11pin 获取温湿度传感器的 %dht11type"  group="温湿度传感器"
   //% subcategory="micro:bit(V2)"
   //% inlineInputMode=inline
   export function dht11value_v2(dht11pin: DigitalPin, dht11type: DHT11Type): number {
@@ -1957,5 +1956,5 @@ namespace makerbit {
   }
 
 
-  
+
 }
