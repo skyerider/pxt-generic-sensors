@@ -1522,7 +1522,6 @@ namespace makerbit {
   //% inlineInputMode=inline
   //% subcategory="传感器"
   export function sensor_flame(pin: DigitalPin): boolean {
-     // pins.digitalWritePin(pin, 0)
       if (pins.digitalReadPin(pin) == 1) {
           return false;
       } else {
@@ -1543,8 +1542,7 @@ namespace makerbit {
   //% inlineInputMode=inline
   //% subcategory="传感器"
   export function sensor_infraredTracking(pin: DigitalPin): boolean {
-   //   pins.digitalWritePin(pin, 0)
-      if (pins.digitalReadPin(pin) == 1) {
+      if (pins.digitalReadPin(pin) == 0) {
           return true;
       } else {
           return false;
@@ -1556,13 +1554,11 @@ namespace makerbit {
   //% inlineInputMode=inline
   //% subcategory="传感器"
   export function sensor_incline(pin: DigitalPin): boolean {
-    //  pins.digitalWritePin(pin, 0)
       if (pins.digitalReadPin(pin) == 1) {
           return false;
       } else {
           return true;
       }
-      // return pins.digitalReadPin(pin)
 
   }
 
