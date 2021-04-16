@@ -1,66 +1,66 @@
 enum PingUnit {
-  //% block="cm"
+  //% block="厘米"
   Centimeters,
-  //% block="inches"
+  //% block="英寸"
   Inches
 }
 
 enum RgbColors {
-  //% block=red
+  //% block=红色
   Red = 0xFF0000,
-  //% block=orange
+  //% block=橙色
   Orange = 0xFFA500,
-  //% block=yellow
+  //% block=黄色
   Yellow = 0xFFFF00,
-  //% block=green
+  //% block=绿色
   Green = 0x00FF00,
-  //% block=blue
+  //% block=蓝色
   Blue = 0x0000FF,
-  //% block=indigo
+  //% block=靛蓝色
   Indigo = 0x4b0082,
-  //% block=violet
+  //% block=紫罗兰色
   Violet = 0x8a2be2,
-  //% block=purple
+  //% block=紫色
   Purple = 0xFF00FF,
-  //% block=white
+  //% block=白色
   White = 0xFFFFFF,
-  //% block=black
+  //% block=熄灭
   Black = 0x000000
 }
 
 enum RgbUltrasonics {
-  //% block=left
+  //% block=左
   Left = 0x00,
-  //% block=right
+  //% block=右
   Right = 0x01,
-  //% block=all
+  //% block=全部
   All = 0x02
 }
 
 enum ColorEffect {
-  //% block=none
+  //% block=无
   None = 0x00,
-  //% block=breathing
+  //% block=呼吸灯
   Breathing = 0x01,
-  //% block=rotate
+  //% block=旋转灯
   Rotate = 0x02,
-  //% block=flash
+  //% block=闪烁
   Flash = 0x03
 }
 
 enum DHT11Type {
-  //% block="temperature(℃)" 
+  //% block="温度(℃)" 
   DHT11_temperature_C = 0,
-  //% block="humidity(0~100)"
+  //% block="湿度(0~100)"
   DHT11_humidity = 1,
 }
 
 enum _selectpin {
-  //% block="Apin"
+  //% block="A引脚"
   Apin = 0,
-  //% block="Bpin"
+  //% block="B引脚"
   Bpin = 1,
-  //% block="Dpin"
+  //% block="D引脚"
   Dpin = 2,
 }
 
@@ -133,27 +133,27 @@ enum IrPins {
 }
 
 enum _rockerpin {
-  //% block="Xpin"
+  //% block="X引脚"
   Xpin = 0,
-  //% block="Ypin"
+  //% block="Y引脚"
   Ypin = 1
 }
 
 enum rotation_direction {
-  //% block="none"
+  //% block="无"
   none = 0,
-  //% block="clockwise"
+  //% block="顺时针"
   clockwise = 1,
-  //% block="counter-clockwise"
+  //% block="逆时针"
   counterclockwise = 2,
-  //% block="180-degree"
+  //% block="180度"
   one_eighty_degree = 3,
 }
 
 enum ledon_off {
-  //% block="on"
+  //% block="开启"
   _on = 1,
-  //% block="off"
+  //% block="关闭"
   _off = 0,
 }
 
@@ -185,25 +185,25 @@ enum _selectcolor {
 
 enum run_turn {
 
-  //% block="forward"
+  //% block="向前"
   forward = 0,
-  //% block="reverse"
+  //% block="向后"
   reverse = 1,
 }
 
 enum LcdBacklight {
-  //% block="on"
+  //% block="打开"
   _on = 1,
-  //% block="off"
+  //% block="关闭"
   _off = 0,
 }
 
 enum Item {
-  //% block="on"
+  //% block="打开"
   _on = 1,
-  //% block="off"
+  //% block="关闭"
   _off = 2,
-  //% block="clear"
+  //% block="清除"
   _clear = 3,
 }
 
@@ -228,30 +228,30 @@ enum Mode {
 }
 
 enum barb_fitting {
-  //% block="LEFT"
+  //% block="左"
   BUTOON_LEFT = 0,
-  //% block="RIGHT" 
+  //% block="右" 
   BUTOON_RIGHT = 1,
-  //% block="UP"
+  //% block="上"
   BUTOON_UP = 2, 
-  //% block="DOWN"
+  //% block="下"
   BUTOON_DOWN = 3, 
-  //% block="BUTTON"
+  //% block="按下"
   JOYSTICK_BUTTON = 4,
 }
 
 enum key_status {
-  //% block="DOWN"
+  //% block="按下"
   PRESS_DOWN = 0,   //按下
-  //% block="UP"
+  //% block="释放"
   PRESS_UP = 1,    //释放
-  //% block="CLICK1"
+  //% block="单击"
   SINGLE_CLICK = 3,     //单击
-  //% block="CLICK2"
+  //% block="双击"
   DOUBLE_CLICK = 4,    //双击
-  //% block="HOLD"
+  //% block="长按"
   LONG_PRESS_HOLD = 6,    //长按
-  //% block="PRESS"
+  //% block="未按下"
   NONE_PRESS = 8,      //未按
 }
 
@@ -809,21 +809,21 @@ namespace makerbit {
 
   //% blockId=actuator_buzzer0 block="有源蜂鸣器控制引脚 ：%pin|状态 %status"   group="有源蜂鸣器"
   //% weight=70
-  //% subcategory="执行器"
+  //% subcategory="输出模块"
   export function actuator_buzzer0(pin: DigitalPin, status: on_off): void {
       pins.digitalWritePin(pin, status)
   }
 
   //% blockId=actuator_buzzer1 block="无源蜂鸣器控制引脚 ：%pin|频率 %freq"   group="无源蜂鸣器"
   //% weight=70
-  //% subcategory="执行器"
+  //% subcategory="输出模块"
   export function actuator_buzzer1(pin: AnalogPin, freq: number): void {
       pins.analogWritePin(pin, freq)
   }
 
   //% blockId=actuator_relay block="继电器控制引脚 ：%pin|状态 %status"   group="继电器"
   //% weight=70
-  //% subcategory="执行器"
+  //% subcategory="输出模块"
   export function actuator_relay(pin: DigitalPin, status: on_off): void {
       pins.digitalWritePin(pin, status)
   }
@@ -834,7 +834,7 @@ namespace makerbit {
 
   //% blockId=actuator_keyborad_pin block="触摸键盘初始化|SDA引脚 %SDO|SCL引脚 %SCL"   group="触摸键盘"
   //% weight=71
-  //% subcategory="执行器"
+  //% subcategory="基础输入模块"
   export function actuator_keyborad_pin(SDA: DigitalPin, SCL: DigitalPin): void {
 
       _SDO = SDA
@@ -843,7 +843,7 @@ namespace makerbit {
 
   //% blockId=actuator_keyborad_read block="读取到的键盘值"   group="触摸键盘"
   //% weight=70
-  //% subcategory="执行器"
+  //% subcategory="基础输入模块"
   export function actuator_keyborad_read(): string {
       let DATA = 0
       pins.digitalWritePin(_SDO, 1)
@@ -881,7 +881,7 @@ namespace makerbit {
 
   //% blockId=setled block="设置LED灯引脚：%lpin|状态 %lstatus"   group="LED灯"
   //% weight=70
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   export function setled(lpin: DigitalPin, lstatus: ledon_off): void {
       pins.digitalWritePin(lpin, lstatus)
   }
@@ -891,7 +891,7 @@ namespace makerbit {
 
   //% blockId=setrgbpin block="设置三色灯引脚|绿 %_GPin|蓝 %_BPin|红 %_RPin"   group="三色灯"
   //% weight=70
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   export function setRGBpin(_GPin: DigitalPin, _BPin: DigitalPin, _RPin: DigitalPin): void {
       _Gpins = _GPin
       _Bpins = _BPin
@@ -903,7 +903,7 @@ namespace makerbit {
   //% g_color.min=0  g_color.max=255
   //% b_color.min=0  b_color.max=255
   //% weight=70
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   export function selectcolor(r_color: number,g_color: number,b_color: number): void {
       pins.analogWritePin(_Rpins,r_color)
       pins.analogWritePin(_Gpins,g_color)
@@ -940,7 +940,7 @@ namespace makerbit {
   }
 
   //% block="LCD1602显示屏初始化,地址 $addr" addr.defl="39"  group="LCD1602显示屏"  
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% weight=70
   export function i2cLcdInit(addr: number) {
       i2cAddr = addr
@@ -959,7 +959,7 @@ namespace makerbit {
   }
 
   //% block="第$y行第$x列显示字符$ch"   group="LCD1602显示屏"  
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% weight=69
   export function i2cLcdShowChar(y: number, x: number, ch: string): void {
       let a: number
@@ -975,7 +975,7 @@ namespace makerbit {
   }
 
   //% block="第$y行第$x列显示数字$n"   group="LCD1602显示屏"  
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% weight=68
   export function i2cLcdShowNumber(y: number, x: number, n: number): void {
       let s = n.toString()
@@ -983,7 +983,7 @@ namespace makerbit {
   }
 
   //% block="第$y行第$x列显示字符串$s"   group="LCD1602显示屏"  
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% weight=67
   export function i2cLcdShowString(y: number, x: number, s: string): void {
       let a: number
@@ -1003,7 +1003,7 @@ namespace makerbit {
 
 
   //% block="LCD1602显示屏控制"   group="LCD1602显示屏"  
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% weight=64
   export function i2cLcdDisplay_Control(item: Item): void {
       if (item == 1) {
@@ -1017,7 +1017,7 @@ namespace makerbit {
       }
   }
 
-  //% subcategory="显示器"  block="设置背景光" group="LCD1602显示屏"
+  //% subcategory="输出模块"  block="设置背景光" group="LCD1602显示屏"
   //% blockId="Backlight switch control"
   //% weight=79
   export function seti2cLcdBacklight(backlight: LcdBacklight): void {
@@ -1119,7 +1119,7 @@ namespace makerbit {
       //% blockId="TM1637_set_intensity" block="%tm| 设置亮度 %val"  group="TM1637数码管"
       //% weight=88 
       //% parts="TM1637"
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       //% val.max=8 val.min=0
       intensity(val: number) {
           if (val < 1) {
@@ -1155,7 +1155,7 @@ namespace makerbit {
       //% weight=90 blockGap=8
       //% parts="TM1637"
       //% bit.max=3 bit.min=0
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       showbit(bit: number, num: number) {
           this.buf[bit % this.count] = _SEGMENTS[num % 16]
           this._dat(bit, _SEGMENTS[num % 16])
@@ -1168,7 +1168,7 @@ namespace makerbit {
       //% blockId="TM1637_shownum" block="%tm显示数字 %num"  group="TM1637数码管"
       //% weight=91 blockGap=8
       //% parts="TM1637"
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       showNumber(num: number) {
           if (num < 0) {
               this._dat(0, 0x40) // '-'
@@ -1188,7 +1188,7 @@ namespace makerbit {
       //% blockId="TM1637_showhex" block="%tm显示十六进制数字%num"   group="TM1637数码管"
       //% weight=90 blockGap=8
       //% parts="TM1637"
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       showHex(num: number) {
           if (num < 0) {
               this._dat(0, 0x40) // '-'
@@ -1209,7 +1209,7 @@ namespace makerbit {
       //% blockId="TM1637_showDP" block="%tm| 点%bit|显示 %_status"  group="TM1637数码管"
       //% weight=70 blockGap=8
       //% parts="TM1637"
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       //% bit.max=3 bit.min=0
       showDP(_status: ledon_off, bit: number) {
           bit = bit % this.count
@@ -1221,7 +1221,7 @@ namespace makerbit {
       //% blockId="TM1637_clear" block="%tm清除显示"  group="TM1637数码管"
       //% weight=80 blockGap=8
       //% parts="TM1637"
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       clear() {
           for (let i = 0; i < this.count; i++) {
               this._dat(i, 0)
@@ -1232,7 +1232,7 @@ namespace makerbit {
       //% blockId="TM1637_on" block="%tm打开显示"  group="TM1637数码管"
       //% weight=86 blockGap=8
       //% parts="TM1637"
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       on() {
           this._ON = 8
           this._write_data_cmd()
@@ -1242,7 +1242,7 @@ namespace makerbit {
       //% blockId="TM1637_off" block="%tm关闭显示"  group="TM1637数码管"
       //% weight=85 blockGap=8
       //% parts="TM1637"
-      //% subcategory="显示器"
+      //% subcategory="输出模块"
       off() {
           this._ON = 0
           this._write_data_cmd()
@@ -1253,7 +1253,7 @@ namespace makerbit {
   //% weight=99 
   //% blockId="TM1637_create" block="TM1637初始化CLK引脚%clk DIO引脚%dio亮度%intensityLED数量(1到4)%count"  group="TM1637数码管"
   //% inlineInputMode=inline
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% intensity.max=8 intensity.min=0
   //% bit.max=4 bit.min=1
   export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): TM1637LEDs {
@@ -1284,7 +1284,7 @@ namespace makerbit {
 
   //% blockId="TM650_Control" block="%option显示" group="TM1650数码管"
   //% weight=40 blockGap=8
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   export function TM650_Control(option: Select) {
       if (option == 0) {
           cmd(_intensity * 16 + 1)
@@ -1305,7 +1305,7 @@ namespace makerbit {
   //% blockId="TM650_DIGIT" block="第%bit位显示数据%num"  group="TM1650数码管"
   //% weight=80 blockGap=8
   //% num.max=15 num.min=0
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% bit.max=3 bit.min=0
   export function digit(num: number, bit: number) {
       dbuf[bit % 4] = _SEG[num % 16]
@@ -1314,7 +1314,7 @@ namespace makerbit {
 
   //% blockId="TM650_SHOW_NUMBER" block="显示数据%num"  group="TM1650数码管"
   //% weight=100 blockGap=8
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   export function showNumber(num: number) {
       if (num < 0) {
           dat(0, 0x40) // '-'
@@ -1329,7 +1329,7 @@ namespace makerbit {
 
   //% blockId="TM650_SHOW_HEX_NUMBER" block="显示十六进制数据%num"  group="TM1650数码管"
   //% weight=90 blockGap=8
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   export function showHex(num: number) {
       if (num < 0) {
           dat(0, 0x40) // '-'
@@ -1344,7 +1344,7 @@ namespace makerbit {
 
   //% blockId="TM650_SHOW_DP" block="设置点 %bit|show %status" group="TM1650数码管"
   //% weight=80 blockGap=8
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% bit.max=3 bit.min=0
   export function showDpAt(status: ledon_off, bit: number) {
       let show = status == 1 ? true : false;
@@ -1354,7 +1354,7 @@ namespace makerbit {
 
   //% blockId="TM650_INTENSITY" block="设置亮度 %dat" group="TM1650数码管"
   //% weight=70 blockGap=8
-  //% subcategory="显示器"
+  //% subcategory="输出模块"
   //% dat.max=7 dat.min=0
   export function setIntensity(dat: number) {
       if ((dat < 0) || (dat > 8)) {
