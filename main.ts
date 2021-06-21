@@ -1001,8 +1001,7 @@ namespace makerbit {
       }
   }
 
-
-  //% block="LCD1602显示屏控制"   group="LCD1602显示屏"  
+  //% block="i2cLcdDisplay_Control %item"   group="LCD1602显示屏"  
   //% subcategory="输出模块"
   //% weight=64
   export function i2cLcdDisplay_Control(item: Item): void {
