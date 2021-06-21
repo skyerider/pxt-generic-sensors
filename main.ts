@@ -1016,8 +1016,8 @@ namespace makerbit {
       }
   }
 
-  //% subcategory="输出模块"  block="设置背景光" group="LCD1602显示屏"
-  //% blockId="Backlight switch control"
+  //% subcategory="输出模块"  block="设置LCD1602显示屏背景光 %backlight" group="LCD1602显示屏"
+  //% blockId="seti2cLcdBacklight"
   //% weight=79
   export function seti2cLcdBacklight(backlight: LcdBacklight): void {
       if (backlight == 1) {
