@@ -828,6 +828,43 @@ namespace makerbit {
       pins.digitalWritePin(pin, status)
   }
 
+  //% blockId=actuator_motor_run block="微型直流电机转动 INA | %_INA | INB | %_INB | 方向 | %turn | 速度 %speed"  group="直流电机"
+  //% weight=70
+  //% inlineInputMode=inline
+  //% speed.min=0 speed.max=255
+  //% subcategory="输出模块"
+  export function actuator_motor_run(_INA: AnalogPin, _INB: AnalogPin, turn: run_turn, speed: number): void {
+
+    if (turn == 0) {
+          pins.analogWritePin(_INA, 0)
+          pins.analogWritePin(_INB, speed)
+
+      } else if (turn == 1) {
+          pins.analogWritePin(_INA, speed)
+          pins.analogWritePin(_INB, 0)
+    }
+
+  }
+
+  /**
+   * 舵机
+   */
+  //% blockId=actuator_servo block="180度微型舵机 %pin|转到角度 %angle"  group="舵机"
+  //% angle.min=0  angle.max=180
+  //% weight=70
+  //% inlineInputMode=inline
+  //% subcategory="输出模块"
+  export function actuator_servo(pin: AnalogPin, angle: number): void {
+
+      let increment = 1
+      pins.servoWritePin(pin, angle)
+      angle = angle + increment
+      if (angle == 0)
+          increment = 1
+      else if (angle == 180)
+          increment = -1
+      basic.pause(100)
+  }  
 
   let _SDO = 0
   let _SCL = 0
