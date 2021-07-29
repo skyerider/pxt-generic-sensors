@@ -323,7 +323,7 @@ const enum IrProtocol {
   NEC = 1,
 }
 
-//% color=#0fbc11 icon="\u272a" block="创之翼工具箱"
+//% color=#0fbc11 weight=10 icon="\u272a" block="创之翼工具箱"
 //% category="创之翼工具箱"
 namespace makerbit {
   let irState: IrState;
@@ -1991,7 +1991,8 @@ namespace makerbit {
 
 }
 
-//% color="#794044" weight=10 icon="\uf108" block="MAX7219 8X8点阵屏
+//% color="#794044" weight=11 icon="\uf108" block="MAX7219 8X8点阵屏"
+//% category="MAX7219 8X8点阵屏"
 namespace max7219{     
   /**
    * MAX7219  
