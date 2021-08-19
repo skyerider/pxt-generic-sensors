@@ -1487,10 +1487,10 @@ namespace makerbit {
   let _DIO = 0
   let _CLK = 0
 
-  //% blockId=basic_piano_pin block="钢琴模块初始化引脚 DIO %DIO CLK %CLK"   group="钢琴模块"
+  //% blockId=basic_piano_pin block="钢琴模块初始化引脚 CLK %CLK DIO %DIO"   group="钢琴模块"
   //% weight=70
   //% subcategory="基础输入模块"
-  export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
+  export function basic_piano_pin(CLK: DigitalPin, DIO: DigitalPin): void {
 
       _DIO = DIO
       _CLK = CLK
