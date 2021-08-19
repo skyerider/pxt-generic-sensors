@@ -50,6 +50,7 @@
   "makerbit._analogRead|block": " %selectpin获取模拟值",
   "makerbit._digitalRead|block": "摇杆模块按键被按下？",
   "makerbit.basic_piano_pin|block": "钢琴模块初始化引脚 DIO %DIO CLK %CLK",
+  "basic_get_piano_key_number|block": "钢琴模块读取按键",
   "makerbit.basic_piano_play|block": "弹奏钢琴",
   "makerbit.sensor_temperature|block": "引脚%pin获取环境温度",
   "makerbit.sensor_flame|block": "引脚%pin检测到火焰？",

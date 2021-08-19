@@ -1496,10 +1496,10 @@ namespace makerbit {
       _CLK = CLK
   }
 
-  //% blockId=basic_piano_key_number block="获取琴键编号"   group="钢琴模块"
-  //% weight=69
+  //% blockId=basic_get_piano_key_number block="获取琴键编号"   group="钢琴模块"
+  //% weight=70
   //% subcategory="基础输入模块"
-  export function basic_piano_key_number(): number {
+  export function basic_get_piano_key_number(): number {
 
     if (0 == pins.digitalReadPin(_DIO)) {
         let list: number[] = []
@@ -1530,6 +1530,7 @@ namespace makerbit {
           return 8;
         }
       }
+      return 0
 }
 
   //% blockId=basic_piano_play block="弹奏钢琴"   group="钢琴模块"
