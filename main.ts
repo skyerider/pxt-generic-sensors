@@ -1496,6 +1496,42 @@ namespace makerbit {
       _CLK = CLK
   }
 
+  //% blockId=basic_piano_key_number block="获取琴键编号"   group="钢琴模块"
+  //% weight=69
+  //% subcategory="基础输入模块"
+  export function basic_piano_key_number(): number {
+
+    if (0 == pins.digitalReadPin(_DIO)) {
+        let list: number[] = []
+        for (let index = 0; index <= 15; index++) {
+            for (let index2 = 0; index2 < 4; index2++) {
+                pins.digitalWritePin(_CLK, 0)
+            }
+            for (let index2 = 0; index2 < 4; index2++) {
+                pins.digitalWritePin(_CLK, 1)
+            }
+            list[index] = pins.digitalReadPin(_DIO)
+        }
+        if (!(list[0])) {
+          return 1;
+        } else if (!(list[1])) {
+          return 2;
+        } else if (!(list[2])) {
+          return 3;
+        } else if (!(list[3])) {
+          return 4;
+        } else if (!(list[4])) {
+          return 5;
+        } else if (!(list[5])) {
+          return 6;
+        } else if (!(list[6])) {
+          return 7;
+        } else if (!(list[7])) {
+          return 8;
+        }
+      }
+}
+
   //% blockId=basic_piano_play block="弹奏钢琴"   group="钢琴模块"
   //% weight=69
   //% subcategory="基础输入模块"
